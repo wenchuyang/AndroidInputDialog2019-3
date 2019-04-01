@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnLongClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,8 +30,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @OnLongClick(R.id.show_button)
+    public boolean show(){
+        Toast.makeText(this, "按久了没有用哦", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
     private void init(){
         show_button.setOnClickListener(onClick);
+
     }
 
     public View.OnClickListener onClick= new View.OnClickListener() {
@@ -48,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    private void showDialog(final Context context, final String title, final Callback<String> callback) {
+    public void showDialog(final Context context, final String title, final Callback<String> callback) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View promptView = layoutInflater.inflate(R.layout.dialog_input, null); //设置输入框样式
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AlertDialog); //设置弹框样式
@@ -74,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //                    Toast.makeText(MainActivity.this, editText.getText().toString(), Toast.LENGTH_SHORT).show();
                 callback.onCallback(editText.getText().toString());
             }
         }); //右边的按钮
