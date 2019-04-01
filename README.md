@@ -80,3 +80,31 @@ builder.show()
 ```
 自定义EditText中，你需要在layout下新建一个dialog_input.xml布局文件，设置这个EditText样式。
 ## 添加弹框的回调
+1. 新建callback接口
+```
+public interface Callback<T> {
+    void onCallback(T result);
+}
+```
+2. 在自定义的方法中使用这个接口
+```
+public void showCustomizeDialog(final Context context, final String title, final Callback<String> callback) {
+    ...
+    builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            callback.onCallback(editText.getText().toString()); //得到editText的值作为参数传给回调函数并执行回调函数。
+        }
+    }); 
+    ...
+}
+```
+3. 调用你的自定义方法
+```
+showCustomizeDialog(MainActivity.this, "Input Dialog", new Callback<String>() {
+    @Override
+    public void onCallback(String result) {
+        Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+    }
+});
+```
