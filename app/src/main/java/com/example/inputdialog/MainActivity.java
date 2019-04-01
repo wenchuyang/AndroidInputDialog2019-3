@@ -18,7 +18,8 @@ import butterknife.OnLongClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.show_button) Button show_button;
+    @BindView(R.id.customize_button) Button customize_button;
+    @BindView(R.id.default_button) Button default_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +31,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnLongClick(R.id.show_button)
-    public boolean show(){
-        Toast.makeText(this, "按久了没有用哦", Toast.LENGTH_SHORT).show();
+    @OnLongClick( {R.id.customize_button, R.id.default_button })
+    public boolean show(View view){
+        switch (view.getId()){
+            case R.id.customize_button:
+            case R.id.default_button:
+                Toast.makeText(this, "按久了没有用哦", Toast.LENGTH_SHORT).show();
+                break;
+        }
         return true;
     }
 
     private void init(){
-        show_button.setOnClickListener(onClick);
+        customize_button.setOnClickListener(onClick);
+        default_button.setOnClickListener(onClick);
 
     }
 
@@ -45,8 +52,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.show_button:
-                    showDialog(MainActivity.this, "Input Dialog", new Callback<String>() {
+                case R.id.customize_button:
+                    showCustomizeDialog(MainActivity.this, "Input Dialog", new Callback<String>() {
+                        @Override
+                        public void onCallback(String result) {
+                            Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    break;
+                case R.id.default_button:
+                    showDefaultDialog(MainActivity.this, "Input Dialog", new Callback<String>() {
                         @Override
                         public void onCallback(String result) {
                             Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
@@ -56,7 +71,21 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    public void showDialog(final Context context, final String title, final Callback<String> callback) {
+    public void showDefaultDialog(final Context context, final String title, final Callback<String> callback){
+        final EditText editText = new EditText(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AlertDialog);
+        builder.setTitle(title);
+        builder.setView(editText);
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                callback.onCallback(editText.getText().toString());
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+    public void showCustomizeDialog(final Context context, final String title, final Callback<String> callback) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View promptView = layoutInflater.inflate(R.layout.dialog_input, null); //设置输入框样式
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AlertDialog); //设置弹框样式

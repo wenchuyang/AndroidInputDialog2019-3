@@ -46,7 +46,7 @@ public boolean show(){
 如果需要同时为多个元素绑定onClick事件：
 ```
 @OnClick( {R.id.show_button2, R.id.show_button3, R.id.show_button4} )
-public void onViewClicked(View view) {
+public boolean onViewClicked(View view) {
     switch (view.getId()) {
         case R.id.show_button2:
             Toast.makeText(this, "onclick1", Toast.LENGTH_SHORT).show();
@@ -58,7 +58,25 @@ public void onViewClicked(View view) {
             Toast.makeText(this, "onclick3", Toast.LENGTH_SHORT).show();
             break;
     }
+    return true;
 }
 ```
 ## 自定义弹框样式
+这里的弹框都是带EditText输入框的弹框。dialog样式定义在styles.xml文件中的`<style name="AlertDialog" parent=...>...item</style>`下。你可以在某一个item下使用`@style/xxx`为这个item定义style xxx。
+1. 默认EditText
+```
+AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AlertDialog); //设置弹框样式
+final EditText editText = new EditText(context);
+builder.setView(editText);
+builder.show();
+```
+2. 自定义EditText
+```
+AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AlertDialog); //设置弹框样式
+LayoutInflater layoutInflater = LayoutInflater.from(context);
+View promptView = layoutInflater.inflate(R.layout.dialog_input, null); //设置输入框样式
+builder.setView(promptView);
+builder.show()
+```
+自定义EditText中，你需要在layout下新建一个dialog_input.xml布局文件，设置这个EditText样式。
 ## 添加弹框的回调
