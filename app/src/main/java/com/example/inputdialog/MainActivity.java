@@ -38,12 +38,17 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.show_button:
-                    showDialog(MainActivity.this, "Input Dialog");
+                    showDialog(MainActivity.this, "Input Dialog", new Callback<String>() {
+                        @Override
+                        public void onCallback(String result) {
+                            Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     break;
             }
         }
     };
-    private void showDialog(final Context context, final String title) {
+    private void showDialog(final Context context, final String title, final Callback<String> callback) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View promptView = layoutInflater.inflate(R.layout.dialog_input, null); //设置输入框样式
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AlertDialog); //设置弹框样式
@@ -69,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "show", Toast.LENGTH_SHORT).show();
+                //                    Toast.makeText(MainActivity.this, editText.getText().toString(), Toast.LENGTH_SHORT).show();
+                callback.onCallback(editText.getText().toString());
             }
         }); //右边的按钮
         builder.setNegativeButton("Cancel", null); //左边的按钮
