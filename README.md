@@ -79,6 +79,13 @@ builder.setView(promptView);
 builder.show()
 ```
 自定义EditText中，你需要在layout下新建一个dialog_input.xml布局文件，设置这个EditText样式。
+在dialog_input.xml文件中，如果你使用的是`<android.support.design.widget.TextInputEditText ... />`需要在build.gradle文件中添加design支持，注意版本问题。
+```
+dependencies {
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+}
+```
 ## 添加弹框的回调
 1. 新建callback接口
 ```
