@@ -38,9 +38,8 @@ dependencies {
 与第二种相同的是一样需要添加依赖和绑定当前activity，使用方法如下：
 ```
 @OnClick(R.id.show_button)
-public boolean show(){
+public void show(){
     ...
-    return true;
 }
 ```
 如果需要同时为多个元素绑定onClick事件：
