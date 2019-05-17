@@ -6,6 +6,10 @@
 button可以绑定的事件有很多，这里用常见的click事件来举例，其它类推。
 1. 直接在页面元素的Onclick后边找到你想要绑定的方法进行绑定（这个方法在Android官网的入门教程里边有）
 2. 使用findViewById/@BindView和setOnclickListener绑定事件（这里介绍BindView）
+3. <font color="red">不要忘了ButterKnife.bind(this)</font>
+4. <font color="red">不要忘了ButterKnife.bind(this)</font>
+5. <font color="red">不要忘了ButterKnife.bind(this)</font>
+
 ```
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.show_button) Button show_button;
