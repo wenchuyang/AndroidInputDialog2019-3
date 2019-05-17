@@ -6,10 +6,6 @@
 button可以绑定的事件有很多，这里用常见的click事件来举例，其它类推。
 1. 直接在页面元素的Onclick后边找到你想要绑定的方法进行绑定（这个方法在Android官网的入门教程里边有）
 2. 使用findViewById/@BindView和setOnclickListener绑定事件（这里介绍BindView）
-3. <font color="red">不要忘了ButterKnife.bind(this)</font>
-4. <font color="red">不要忘了ButterKnife.bind(this)</font>
-5. <font color="red">不要忘了ButterKnife.bind(this)</font>
-
 ```
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.show_button) Button show_button;
@@ -64,6 +60,10 @@ public boolean onViewClicked(View view) {
     return true;
 }
 ```
+<font bgcolor=#FF4500> 不要忘了ButterKnife.bind(this)</font>
+<font bgcolor=#FF4500> 不要忘了ButterKnife.bind(this)</font>
+<font bgcolor=#FF4500> 不要忘了ButterKnife.bind(this)</font>
+
 ## 自定义弹框样式
 这里的弹框都是带EditText输入框的弹框。dialog样式定义在styles.xml文件中的`<style name="AlertDialog" parent=...>...item</style>`下。你可以在某一个item下使用`@style/xxx`为这个item定义style xxx。
 1. 默认EditText
