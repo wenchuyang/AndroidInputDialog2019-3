@@ -45,7 +45,7 @@ public void show(){
 如果需要同时为多个元素绑定onClick事件：
 ```
 @OnClick( {R.id.show_button2, R.id.show_button3, R.id.show_button4} )
-public boolean onViewClicked(View view) {
+public void onViewClicked(View view) {
     switch (view.getId()) {
         case R.id.show_button2:
             Toast.makeText(this, "onclick1", Toast.LENGTH_SHORT).show();
@@ -57,12 +57,11 @@ public boolean onViewClicked(View view) {
             Toast.makeText(this, "onclick3", Toast.LENGTH_SHORT).show();
             break;
     }
-    return true;
 }
 ```
-<font bgcolor=#FF4500> 不要忘了ButterKnife.bind(this)</font>
-<font bgcolor=#FF4500> 不要忘了ButterKnife.bind(this)</font>
-<font bgcolor=#FF4500> 不要忘了ButterKnife.bind(this)</font>
+<font bgcolor=#FF4500> 不要忘了ButterKnife.bind(this)</font><br>
+<font bgcolor=#FF4500> 不要忘了ButterKnife.bind(this)</font><br>
+<font bgcolor=#FF4500> 不要忘了ButterKnife.bind(this)</font><br>
 
 ## 自定义弹框样式
 这里的弹框都是带EditText输入框的弹框。dialog样式定义在styles.xml文件中的`<style name="AlertDialog" parent=...>...item</style>`下。你可以在某一个item下使用`@style/xxx`为这个item定义style xxx。
